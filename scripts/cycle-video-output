@@ -1,0 +1,24 @@
+#!/bin/sh
+
+statefile=$HOME/.cycle-video-output
+if test -r $statefile; then
+    exec <$statefile
+    read state
+    exec <&-
+else
+    state="0"
+fi
+
+state=$((1 - $state))
+echo $state > $statefile
+
+case $state in
+    0)
+        xrandr --output DP-1 --off
+        notify-send "External Video Off"
+        ;;
+    1)
+        xrandr --output DP-1 --auto --above eDP-1
+        notify-send "External Video On"
+        ;;
+esac
