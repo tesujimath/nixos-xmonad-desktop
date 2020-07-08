@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-export PATH=$HOME/vc/sjg/scripts:$PATH
-
 test -r .Xresources && xrdb -merge .Xresources
 
 xsetroot -solid gray30
@@ -23,9 +21,6 @@ udiskie --tray &
 
 # volume notification daemon
 volnoti -t 2
-
-# wait for trayer to start, sigh
-#sleep 1
 
 # for xmonad
 export NIX_GHC=`which ghc`
