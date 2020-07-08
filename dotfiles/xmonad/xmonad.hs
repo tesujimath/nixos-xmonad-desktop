@@ -38,7 +38,7 @@ main = do
                     }
         , focusFollowsMouse  = True
         , borderWidth        = 4
-        , terminal           = "xterm" -- was gnome-terminal, urxvt256c
+        , terminal           = "gnome-terminal"
         , normalBorderColor  = "#cccccc"
         , focusedBorderColor = "#ff8c00"
         , modMask = mod4Mask     -- Rebind Mod to the Windows key
