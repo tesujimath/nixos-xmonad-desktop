@@ -43,13 +43,22 @@ main = do
         , focusedBorderColor = "#ff8c00"
         , modMask = mod4Mask     -- Rebind Mod to the Windows key
         } `additionalKeys`
-        [ ((mod4Mask .|. shiftMask, xK_l), spawn "lockscreen")
+        (
+          [ ((mod4Mask .|. shiftMask, xK_l), spawn "lockscreen")
         , ((controlMask, xK_Print), spawn "sleep 0.2 && mkdir -p $HOME/screenshots && cd $HOME/screenshots && scrot -s")
         , ((0, xK_Print), spawn "mkdir -p $HOME/screenshots && cd $HOME/screenshots && scrot")
         , ((mod4Mask, xK_o), spawn "dmenu_run -fn xft:cantarell:pixelsize=16")
         , ((mod4Mask .|. shiftMask, xK_o), spawn "gmrun")
         , ((mod4Mask, xK_p), spawn "cycle-video-output")
-        ] `additionalKeysP`
+        ]
+        ++
+        -- mod-{e,r,t,y} %! Switch to physical/Xinerama screens 1, 2, 3 or 4
+        -- mod-shift-{e,r,t,y} %! Move client to screen 1, 2, 3 or 4
+        -- adapted from xmonad/src/XMonad/Config.hs
+        [((m .|. mod4Mask, key), screenWorkspace sc >>= flip whenJust (windows . f))
+            | (key, sc) <- zip [xK_e, xK_r, xK_y, xK_t] [0..]
+            , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+        ) `additionalKeysP`
         [ ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
         , ("<XF86AudioRaiseVolume>", spawn "audio-volume +5%")
         , ("<XF86AudioLowerVolume>", spawn "audio-volume -5%")
