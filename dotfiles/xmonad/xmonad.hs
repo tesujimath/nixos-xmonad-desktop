@@ -59,10 +59,7 @@ main = do
             | (key, sc) <- zip [xK_e, xK_r, xK_y, xK_t] [0..]
             , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
         ) `additionalKeysP`
-        [ ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
-        , ("<XF86AudioRaiseVolume>", spawn "audio-volume +5%")
-        , ("<XF86AudioLowerVolume>", spawn "audio-volume -5%")
-        , ("<XF86MonBrightnessUp>", spawn "mon-brightness -A 5")
+        [ ("<XF86MonBrightnessUp>", spawn "mon-brightness -A 5")
         , ("<XF86MonBrightnessDown>", spawn "mon-brightness -U 5")
         ] `additionalMouseBindings`
         [ ((mod4Mask .|. shiftMask, button1), \w -> focus w >> mouseResizeWindow w >> windows W.shiftMaster) ]

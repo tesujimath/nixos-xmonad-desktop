@@ -19,8 +19,7 @@ nm-applet &
 
 udiskie --tray &
 
-# volume notification daemon
-volnoti -t 2
+pasystray &
 
 # for xmonad
 export NIX_GHC=`which ghc`
