@@ -49,7 +49,6 @@ main = do
         , ((0, xK_Print), spawn "mkdir -p $HOME/screenshots && cd $HOME/screenshots && scrot")
         , ((mod4Mask, xK_o), spawn "dmenu_run -fn xft:cantarell:pixelsize=16")
         , ((mod4Mask .|. shiftMask, xK_o), spawn "gmrun")
-        , ((mod4Mask, xK_p), spawn "cycle-video-output")
         ]
         ++
         -- mod-{e,r,t,y} %! Switch to physical/Xinerama screens 1, 2, 3 or 4
