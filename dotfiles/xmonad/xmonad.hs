@@ -42,11 +42,12 @@ main = do
         , normalBorderColor  = "#cccccc"
         , focusedBorderColor = "#ff8c00"
         , modMask = mod4Mask     -- Rebind Mod to the Windows key
-        } `additionalKeys`
-        (
-          [ ((mod4Mask .|. shiftMask, xK_l), spawn "lockscreen")
+        } `additionalKeys` myKeys `additionalKeysP` myKeysP `additionalMouseBindings` myMouseBindings
+
+myKeys :: [((KeyMask, KeySym), X ())]
+myKeys = [ ((mod4Mask .|. shiftMask, xK_l), spawn "lockscreen")
         , ((controlMask, xK_Print), spawn "sleep 0.2 && mkdir -p $HOME/screenshots && cd $HOME/screenshots && scrot -s")
-        , ((0, xK_Print), spawn "mkdir -p $HOME/screenshots && cd $HOME/screenshots && scrot")
+        , ((0, xK_Print), spawn "mkdir -p $HOME/screenshots && cd $HOME/screenshots && sleep 0.2 && scrot -s")
         , ((mod4Mask, xK_o), spawn "dmenu_run -fn xft:cantarell:pixelsize=16")
         , ((mod4Mask .|. shiftMask, xK_o), spawn "gmrun")
         ]
@@ -57,11 +58,14 @@ main = do
         [((m .|. mod4Mask, key), screenWorkspace sc >>= flip whenJust (windows . f))
             | (key, sc) <- zip [xK_e, xK_r, xK_y, xK_t] [0..]
             , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
-        ) `additionalKeysP`
-        [ ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+
+myKeysP :: [(String, X ())]
+myKeysP = [ ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
         , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%")
         , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
         , ("<XF86MonBrightnessUp>", spawn "mon-brightness -A 5")
         , ("<XF86MonBrightnessDown>", spawn "mon-brightness -U 5")
-        ] `additionalMouseBindings`
-        [ ((mod4Mask .|. shiftMask, button1), \w -> focus w >> mouseResizeWindow w >> windows W.shiftMaster) ]
+        ]
+
+myMouseBindings :: [((ButtonMask, Button), Window -> X ())]
+myMouseBindings = [ ((mod4Mask .|. shiftMask, button1), \w -> focus w >> mouseResizeWindow w >> windows W.shiftMaster) ]
