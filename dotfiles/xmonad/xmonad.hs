@@ -25,7 +25,7 @@ myManageHook = composeAll
 
 main = do
   xmproc <- spawnPipe "xmobar"
-  xmonad $ def
+  xmonad $ ewmh def
         { manageHook = manageDocks <+> myManageHook <+> manageHook def
         , layoutHook = avoidStruts  $  smartBorders  $  layoutHook def
         , handleEventHook = mconcat
@@ -50,6 +50,7 @@ myKeys = [ ((mod4Mask .|. shiftMask, xK_l), spawn "lockscreen")
         , ((0, xK_Print), spawn "mkdir -p $HOME/screenshots && cd $HOME/screenshots && sleep 0.2 && scrot -s")
         , ((mod4Mask, xK_o), spawn "dmenu_run -fn xft:cantarell:pixelsize=16")
         , ((mod4Mask .|. shiftMask, xK_o), spawn "gmrun")
+        , ((mod4Mask, xK_Escape), spawn "skippy-xd")
         ]
         ++
         -- mod-{e,r,t,y} %! Switch to physical/Xinerama screens 1, 2, 3 or 4
