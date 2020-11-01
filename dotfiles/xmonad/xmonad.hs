@@ -53,11 +53,13 @@ myKeys = [ ((mod4Mask .|. shiftMask, xK_l), spawn "lockscreen")
         , ((mod4Mask, xK_Tab), spawn "skippy-xd")
         ]
         ++
-        -- mod-shift-{e,r,t,y} %! Move client to screen 1, 2, 3 or 4
+        -- alt-mod-{1,2,4,3} %! Switch to physical/Xinerama screens 1, 2, 3 or 4
+        -- alt-mod-shift-{1,2,4,3} %! Move client to screen 1, 2, 3 or 4
         -- adapted from xmonad/src/XMonad/Config.hs
-        [((m .|. mod4Mask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-            | (key, sc) <- zip [xK_e, xK_r, xK_y, xK_t] [0..]
-            , (f, m) <- [(W.shift, shiftMask)]]
+        -- unsure why the physical screens to logical screen isn't quite right
+        [((m .|. mod4Mask .|. mod1Mask, key), screenWorkspace sc >>= flip whenJust (windows . f))
+            | (key, sc) <- zip [xK_1, xK_2, xK_4, xK_3] [0..]
+            , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 myKeysP :: [(String, X ())]
 myKeysP = [ ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
