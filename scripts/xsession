@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+test -r $HOME/.env.sh && . $HOME/.env.sh
+
 test -r .Xresources && xrdb -merge .Xresources
 
 xsetroot -solid gray30
