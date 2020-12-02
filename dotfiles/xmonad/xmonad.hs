@@ -46,8 +46,7 @@ main = do
 
 myKeys :: [((KeyMask, KeySym), X ())]
 myKeys = [ ((mod4Mask .|. shiftMask, xK_l), spawn "lockscreen")
-        , ((controlMask, xK_Print), spawn "sleep 0.2 && mkdir -p $HOME/screenshots && cd $HOME/screenshots && scrot -s")
-        , ((0, xK_Print), spawn "mkdir -p $HOME/screenshots && cd $HOME/screenshots && sleep 0.2 && scrot -s")
+        , ((0, xK_Print), spawn "screenshot")
         , ((mod4Mask, xK_o), spawn "dmenu_run -fn xft:cantarell:pixelsize=16")
         , ((mod4Mask .|. shiftMask, xK_o), spawn "gmrun")
         , ((mod4Mask, xK_Tab), spawn "skippy-xd")
