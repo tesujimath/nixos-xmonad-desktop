@@ -16,6 +16,7 @@ myManageHook = composeAll
     , className =? "Sxiv"      --> doFloat
     , className =? "mpv"       --> doFloat
     , className =? "Zathura"   --> doFloat
+    , appName   =? "zoom"      --> doFloat
     , className =? "Rumno-background" --> doFloat <+> hasBorder False
     , className =? "Screenruler.rb"   --> doFloat <+> hasBorder False
     -- for screen recording
