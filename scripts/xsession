@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 test -r $HOME/.env.sh && . $HOME/.env.sh
+env >> $HOME/.xsession-errors
 
 test -r .Xresources && xrdb -merge .Xresources
 
