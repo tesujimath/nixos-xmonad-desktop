@@ -38,7 +38,7 @@ main = do
                     }
         , focusFollowsMouse  = True
         , borderWidth        = 4
-        , terminal           = "gnome-terminal"
+        , terminal           = "run-with-environment gnome-terminal"
         , normalBorderColor  = "#cccccc"
         , focusedBorderColor = "#ff8c00"
         , modMask = mod4Mask     -- Rebind Mod to the Windows key
@@ -47,8 +47,8 @@ main = do
 myKeys :: [((KeyMask, KeySym), X ())]
 myKeys = [ ((mod4Mask .|. shiftMask, xK_l), spawn "lockscreen")
         , ((0, xK_Print), spawn "screenshot")
-        , ((mod4Mask, xK_o), spawn "dmenu_run -fn xft:cantarell:pixelsize=16")
-        , ((mod4Mask .|. shiftMask, xK_o), spawn "gmrun")
+        , ((mod4Mask, xK_o), spawn "run-with-environment dmenu_run -fn xft:cantarell:pixelsize=16")
+        , ((mod4Mask .|. shiftMask, xK_o), spawn "run-with-environment gmrun")
         , ((mod4Mask, xK_Tab), spawn "skippy-xd")
         ]
         ++
